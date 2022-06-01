@@ -108,6 +108,7 @@ GEM
     guard-minitest (2.4.6)
       guard-compat (~> 1.2)
       minitest (>= 3.0)
+    htmlbeautifier (1.4.2)
     i18n (1.10.0)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.1.0)
@@ -211,6 +212,7 @@ GEM
     rexml (3.2.5)
     ruby-progressbar (1.11.0)
     rubyzip (2.3.2)
+    rufo (0.13.0)
     sassc (2.4.0)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
@@ -271,6 +273,7 @@ DEPENDENCIES
   debug (= 1.5.0)
   guard (= 2.18.0)
   guard-minitest (= 2.4.6)
+  htmlbeautifier
   importmap-rails (= 1.1.0)
   jbuilder (= 2.11.5)
   minitest (= 5.15.0)
@@ -279,6 +282,7 @@ DEPENDENCIES
   puma (= 5.6.4)
   rails (= 7.0.3)
   rails-controller-testing (= 1.0.5)
+  rufo
   sassc-rails (= 2.1.2)
   selenium-webdriver (= 4.2.0)
   sprockets-rails (= 3.4.2)
