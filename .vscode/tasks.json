@@ -1,0 +1,39 @@
+{
+  "version": "2.0.0",
+  "presentation": {
+    "panel": "new",
+  },
+  
+  "tasks": [
+    {
+      "label": "Rails server",
+      "type": "shell",
+      "command": "${workspaceFolder}/.vscode/scripts/start-dev.sh",
+      "group": "none",
+      "presentation": {
+        "reveal": "always"
+      },
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    },
+    {
+      "label": "Guard",
+      "type": "shell",
+      "command": "rails test && bundle _2.3.14_ exec guard",
+      "group": "none",
+      "presentation": {
+        "reveal": "always"
+      },
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    },
+    {
+      "label": "Open prod",
+      "type": "shell",
+      "command": "${workspaceFolder}/.vscode/scripts/open-prod.sh",
+      "group": "none",
+    }
+  ],
+}
