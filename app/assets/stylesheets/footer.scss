@@ -1,0 +1,30 @@
+@import 'bootstrap';
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
+  color: $gray-600;
+  display: flex;
+  justify-content: space-between;
+  
+  a {
+    color: $gray-600;
+    text-decoration: none;
+  }
+
+  a:hover {
+    opacity: .8;
+    text-decoration: underline;
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+  }
+
+  ul li {
+    margin-left: 15px;
+  }
+
+}

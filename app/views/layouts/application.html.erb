@@ -1,38 +1,15 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= full_title(yield(:title)) %></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta charset="utf-8" />
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+  <%= render 'layouts/head' %>
 
-    <%= stylesheet_link_tag 'application', "data-turbo-track": 'reload' %>
-    <!--[if lt IE 9]>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js"></script>
-    <![endif]-->
-  </head>
   <body>
-    <header>
-      <div class="container">
-        <nav class="navbar fixed-top bg-dark px-5">
-          <%= link_to 'sample app', '#', class: 'logo', id: 'logo' %>
-          <ul class="nav">
-            <li class="nav-item">
-              <%= link_to 'Home', '#', class: 'nav-link text-white' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to 'Help', '#', class: 'nav-link text-white' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to 'Log in', '#', class: 'nav-link text-white' %>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
+    <%= render 'layouts/header' %>
     <div class="container">
-      <%= yield %>
+      <main>
+        <%= yield %>
+      </main>
+
+      <%= render 'layouts/footer' %>
     </div>
   </body>
 </html>
