@@ -12,6 +12,13 @@ gem "stimulus-rails", "1.0.4"
 gem "jbuilder", "2.11.5"
 gem "puma", "5.6.4"
 gem "bootsnap", "1.12.0", require: false
+
+# Bootstrap 5 gem requires sprockets-rails >= 2.3.2
+# Also import bootstrap into app/assets/stylesheets/appliation.css 
+# and change the file extension to .scss 
+gem "bootstrap", "~> 5.1.3"
+
+# for automatic formatting of rb and erb files
 gem "htmlbeautifier"
 gem "rufo"
 
