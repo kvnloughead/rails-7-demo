@@ -1,0 +1,20 @@
+<!-- @user injected into the view by user_controller -->
+<!-- url: root_path/users?id=user-id -->
+
+<p><%= @user.name %></p>
+<p><%= @user.email %></p>
+
+<p>
+  Created
+  <time><%= @user.created_at %></time>
+</p>
+
+<p>
+  Updated:
+  <time><%= @user.updated_at %></time>
+</p>
+
+<p>
+  Current time:
+  <time><%= Time.now %></time>
+</p>
