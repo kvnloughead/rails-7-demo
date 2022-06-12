@@ -1,5 +1,8 @@
 @import "bootstrap";  
 
+
+
+
 body {
   padding-top: 100px;
 }
@@ -38,18 +41,22 @@ textarea {
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
 }
+  
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 10px;
+  text-align: center;
+}  
+
+form h1 {
+  margin-bottom: 30px;
+}
 
 .lead-container {
   text-align: center;
   background-color: $gray-200;
   width: 100%;
-
-  h1 {
-    font-size: 3em;
-    letter-spacing: -2px;
-    margin-bottom: 10px;
-    text-align: center;
-  }  
 }
 
 
@@ -73,3 +80,4 @@ h2 {
   width: 100%;
   margin-top: 45px;
 }
+
