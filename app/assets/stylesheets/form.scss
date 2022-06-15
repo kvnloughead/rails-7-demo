@@ -1,5 +1,6 @@
-@import "./mixins.scss";  
+@import "bootstrap";
 
+@import "./mixins.scss";  
 
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
@@ -16,3 +17,20 @@ label {
 input {
   height: auto !important;
 }
+
+.error_explanation {
+  color: $danger;
+  ul {
+    color: $danger;
+    margin: 0;
+  }
+}
+
+// Rails wraps input fields with errors in div.field_with_errors
+.field_with_errors {
+  @extend .has-error !optional;
+  .form-control {
+    color: $danger;
+  }
+}
+
