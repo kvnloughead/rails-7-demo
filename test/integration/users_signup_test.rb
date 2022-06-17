@@ -6,7 +6,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     @user_data = { name: "Example User", 
                    email: "example@example.com", 
                    password: "password", 
-                   password_confirmation: "password_confirmation"}
+                   password_confirmation: "password"}
     @no_name = { **@user_data, name: "" }
     @bad_email = { **@user_data, email: "foo@bar" }
     @short_pwd = { **@user_data, password: "pass" }
@@ -35,6 +35,15 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
 
     assert_response :unprocessable_entity # status code 422
     assert_template 'users/new'
-    # assert_select 'div.form_with_errors'
+  end
+
+  test "user created on valid form submission" do
+    assert_difference 'User.count', 1 do
+      post users_path, params: { user: @user_data } 
+    end
+    # Go where redirected and make sure correct template is rendered
+    follow_redirect!
+    assert_template 'users/show'
+    assert_not flash.empty?
   end
 end

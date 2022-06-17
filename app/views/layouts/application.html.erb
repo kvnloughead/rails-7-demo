@@ -5,6 +5,12 @@
   <body>
     <%= render 'layouts/header' %>
     <div class="container">
+      <% flash.each do |message_type, message| %>
+        <!-- content_tag(tag, content, options) -->
+        <!-- Renders <tag> with the given content and options -->
+        <%= content_tag :div, message, class: "alert alert-#{message_type}" %>
+      <% end %>
+
       <main>
         <%= yield %>
       </main>

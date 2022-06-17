@@ -4,15 +4,18 @@ class UsersController < ApplicationController
   end
 
   def show
-    # injects @user variable with appropriate id into the view
-    # url: root_path/users?id=user-id
+    # Injects @user variable with appropriate id into the view
+    #  - url: root_path/users?id=user-id
     @user = User.find(params[:id])
   end
 
   def create 
     @user = User.new(user_params)
     if @user.save
-      # success
+      # The flash hash will be available in the templates. The :success key is # conventional, but arbitrary. See application.html.erb for the markup.
+      flash[:success] = "You've successfully registered!"
+      # Rails infers this to mean `redirect_to user_url(@user)` 
+      redirect_to @user 
     else
       # HTTP status 422. This is necessary in Rails 7 
       # when rendering regular HTML with Turbo
