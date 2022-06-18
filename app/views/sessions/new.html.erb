@@ -1,0 +1,27 @@
+<!-- Login form: creates a new session -->
+
+<% provide(:title, 'Log in') %>
+
+<div class="row d-flex justify-content-center">
+  <div class="col-md-6 col-md-offset-3">
+    <!-- 
+    Passing the :url tells the form where to make the request.
+      - :scope - The scope to prefix input field names with and thereby how 
+                 the submitted parameters are grouped in controllers.
+      - results in params hash { session: { email: "...", password: "..." } }
+    -->
+    <%= form_with(url: login_path, scope: :session) do |f| %>
+      <h1>Log in</h1>
+
+      <%= f.label :email %>
+      <%= f.email_field :email, class: 'form-control' %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password, class: 'form-control' %>
+
+      <%= f.submit 'Log in', class: 'btn btn-primary mt-3' %>
+
+      <p class="mt-4">New user? <%= link_to 'Sign up now!', signup_path %></p>
+    <% end %>
+  </div>
+</div>

@@ -4,6 +4,17 @@ My implementation of the sample application for the [_Ruby on Rails Tutorial:
 Learn Web Development with Rails_](https://www.railstutorial.org/)
 by [Michael Hartl](https://www.michaelhartl.com/).
 
+## Features
+
+- A Rails 7 app using Postgresql and Heroku
+- Styling with Bootstrap 5 and Sass
+- Code formatting with Prettier and Rufo
+- Test driven development
+- User registration and login
+- Support for Gravatars
+- WIP
+  - Persistent login sessions via cookies
+
 ## License
 
 All source code in the [Ruby on Rails Tutorial](https://www.railstutorial.org/)
