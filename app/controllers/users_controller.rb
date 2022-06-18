@@ -17,8 +17,7 @@ class UsersController < ApplicationController
       # Rails infers this to mean `redirect_to user_url(@user)` 
       redirect_to @user 
     else
-      # HTTP status 422. This is necessary in Rails 7 
-      # when rendering regular HTML with Turbo
+      n
       render 'new', status: :unprocessable_entity 
     end
   end
