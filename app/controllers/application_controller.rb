@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  def hello
-    render html: "Hello, world!"
-  end
+  # Including session_helper allows its methods to be used in all controllers
+  include SessionsHelper
 end

@@ -17,7 +17,6 @@ class UsersController < ApplicationController
       # Rails infers this to mean `redirect_to user_url(@user)` 
       redirect_to @user 
     else
-      n
       render 'new', status: :unprocessable_entity 
     end
   end
