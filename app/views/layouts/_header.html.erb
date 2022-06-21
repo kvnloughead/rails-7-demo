@@ -11,9 +11,37 @@
           <%= link_to 'Help', help_path, class: 'nav-link text-white' %>
         </li>
 
-        <li class="nav-item">
-          <%= link_to 'Log in', '#', class: 'nav-link text-white' %>
-        </li>
+        <% if logged_in? %>
+          <li><%= link_to 'Users', '#', class: 'nav-link text-white' %></li>
+          <li class="dropdown">
+            <a
+              id="account"
+              href="#"
+              class="nav-link text-white dropdown-toggle"
+            >
+              Account <b class="caret"></b>
+            </a>
+            <ul id="dropdown-menu" class="dropdown-menu">
+              <!-- current_user <=> user_path(current_user) -->
+              <li><%= link_to 'Profile', current_user %></li>
+              <li><%= link_to 'Settings', '#' %></li>
+              <li class="divider"></li>
+              <li>
+                <%=
+                  link_to 'Log out',
+                          logout_path,
+                          data: {
+                            "turbo-method": :delete,
+                          }
+                %>
+              </li>
+            </ul>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to 'Log in', '#', class: 'nav-link text-white' %>
+          </li>
+        <% end %>
       </ul>
     </nav>
   </div>
