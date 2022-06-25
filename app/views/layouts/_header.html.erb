@@ -1,55 +1,76 @@
 <header>
   <div class="container">
-    <nav class="navbar fixed-top bg-dark px-5">
-      <%= link_to 'sample app', root_path, class: 'logo', id: 'logo' %>
-      <ul class="nav">
-        <li class="nav-item">
-          <%= link_to 'Home', root_path, class: 'nav-link text-white' %>
-        </li>
+    <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark py-4">
+      <div class="container">
+        <%= link_to 'sample app', root_path, class: 'logo p-0', id: 'logo' %>
 
-        <li class="nav-item">
-          <%= link_to 'Help', help_path, class: 'nav-link text-white' %>
-        </li>
+        <button
+          id="hamburger"
+          class="navbar-toggler border-0"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbar-menu"
+          aria-controls="navbar-menu"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="visually-hidden-focusable">Toggle navigation</span>
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navbar-menu" class="collapse navbar-collapse pt-2 ps-2">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <%= link_to 'Home', root_path, class: 'nav-link text-white' %>
+            </li>
 
-        <% if logged_in? %>
-          <li><%= link_to 'Users', '#', class: 'nav-link text-white' %></li>
-          <li class="dropdown">
-            <a
-              id="account"
-              href="#"
-              class="nav-link text-white dropdown-toggle"
-            >
-              Account <b class="caret"></b>
-            </a>
-            <ul id="dropdown-menu" class="dropdown-menu">
-              <!-- current_user <=> user_path(current_user) -->
-              <li>
+            <li class="nav-item">
+              <%= link_to 'Help', help_path, class: 'nav-link text-white' %>
+            </li>
+
+            <% if logged_in? %>
+              <li><%= link_to 'Users', '#', class: 'nav-link text-white' %></li>
+              <li class="dropdown">
+                <a
+                  id="account"
+                  href="#"
+                  class="nav-link text-white dropdown-toggle"
+                >
+                  Account <b class="caret"></b>
+                </a>
+                <ul id="dropdown-menu" class="dropdown-menu bg-dark ps-2">
+                  <li>
+                    <%=
+                      link_to 'Profile',
+                              current_user,
+                              class: 'nav-link text-white'
+                    %>
+                  </li>
+                  <li>
+                    <%= link_to 'Settings', '#', class: 'nav-link text-white' %>
+                  </li>
+                  <li class="divider"></li>
+                  <li>
+                    <%=
+                      link_to 'Log out',
+                              logout_path,
+                              class: 'nav-link text-white',
+                              data: {
+                                "turbo-method": :delete,
+                              }
+                    %>
+                  </li>
+                </ul>
+              </li>
+            <% else %>
+              <li class="nav-item">
                 <%=
-                  link_to 'Profile', current_user, class: 'nav-link text-white'
+                  link_to 'Log in', login_path, class: 'nav-link text-white'
                 %>
               </li>
-              <li>
-                <%= link_to 'Settings', '#', class: 'nav-link text-white' %>
-              </li>
-              <li class="divider"></li>
-              <li>
-                <%=
-                  link_to 'Log out',
-                          logout_path,
-                          class: 'nav-link text-white',
-                          data: {
-                            "turbo-method": :delete,
-                          }
-                %>
-              </li>
-            </ul>
-          </li>
-        <% else %>
-          <li class="nav-item">
-            <%= link_to 'Log in', login_path, class: 'nav-link text-white' %>
-          </li>
-        <% end %>
-      </ul>
+            <% end %>
+          </ul>
+        </div>
+      </div>
     </nav>
   </div>
 </header>
