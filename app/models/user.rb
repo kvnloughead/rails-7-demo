@@ -20,4 +20,13 @@ class User < ApplicationRecord
   #    with presence validation and matching requirement
   #  - authenticate method the returns user when password is correct
   has_secure_password
+
+  # Returns hash digest of the given string. 
+  # Used in creating fixtures for testing (test/fixtures/users.yml)
+  def User.digest(string)
+    # Use minimum cost in testing environment, maximum in production
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : 
+                                                  BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end                                                  
 end

@@ -6,8 +6,8 @@ class SessionsController < ApplicationController
     # params comes from login form submission
     user = User.find_by(email: params[:session][:email].downcase)
     
-    # If user exists and password matches
-    if user && user.authenticate(params[:session][:password])
+    # `user&.foo` is equivalent to `user && user.foo`
+    if user&.authenticate(params[:session][:password])
       reset_session    # rails built-in; protects agains session fixation
       log_in user      # log_in is defined in session_helper
       redirect_to user # user is converted to user_url(user)
