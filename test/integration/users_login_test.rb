@@ -49,11 +49,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", logout_path
     assert_select "a[href=?]", user_path(@user)
 
-    # assert_template 'sessions/new'
-    # assert_not flash.empty?
-    
-    # flash is gone after rendering a different endpoint
-    # get root_path
-    # assert flash.empty?
+    # Checks that user's id is the id that's stored in the session
+    assert_equal @user.id, session[:user_id]
   end
 end
