@@ -8,7 +8,8 @@ class SessionsController < ApplicationController
     
     # `user&.foo` is equivalent to `user && user.foo`
     if user&.authenticate(params[:session][:password])
-      reset_session    # rails built-in; protects agains session fixation
+      # Rails built-in, used here to protect against session fixation.
+      reset_session
       log_in user      # log_in is defined in session_helper
       redirect_to user # user is converted to user_url(user)
     else
@@ -20,6 +21,9 @@ class SessionsController < ApplicationController
     end
   end
 
+  # Logs out current user.
   def destroy
+    log_out
+    redirect_to root_url, status: :see_other # 303 is returned on DELETE
   end
 end

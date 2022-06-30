@@ -12,7 +12,8 @@ class UsersController < ApplicationController
   def create 
     @user = User.new(user_params)
     if @user.save
-      reset_session # guards aggains session-fixation attacts
+      # Rails built-in, used here to protect against session fixation.
+      reset_session
       log_in @user
       
       # The flash hash will be available in the templates. The :success key is # conventional, but arbitrary. See application.html.erb for the markup.
