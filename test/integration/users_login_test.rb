@@ -44,7 +44,7 @@ class UsersLogin < ActionDispatch::IntegrationTest
 
   class ValidLoginTest < ValidLogin
     test "valid login" do
-      assert_equal @user.id, session[:user_id]
+      assert is_logged_in?
       assert_redirected_to @user
     end
 
@@ -63,7 +63,7 @@ class UsersLogin < ActionDispatch::IntegrationTest
       end
 
       test "successful logout" do
-        assert_not_equal @user.id, session[:user_id]
+        assert_not is_logged_in?
         assert_response :see_other
         assert_redirected_to root_url
       end

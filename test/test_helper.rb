@@ -14,4 +14,7 @@ class ActiveSupport::TestCase
   fixtures :all
   include ApplicationHelper
   
+  def is_logged_in?
+    @user.id == session[:user_id]
+  end
 end
