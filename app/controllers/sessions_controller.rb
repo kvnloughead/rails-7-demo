@@ -1,3 +1,8 @@
+# Sessions are not persistent by default, so user will not be remembered unless
+# the remember me box is checked when logging in. However, in my experience
+# users will still be remembered unless you uncheck the browser option to 
+# continue running background apps when the browser is closed.
+
 class SessionsController < ApplicationController
   def new
   end
@@ -10,17 +15,11 @@ class SessionsController < ApplicationController
     if user&.authenticate(params[:session][:password])
       # Rails built-in, used here to protect against session fixation.
       reset_session
-
-      # Remembers user in a persistent session, by:
-      # - calling user.remember to create the relevant rememeber_token and #    
-      #   remember_digest attributes 
-      # - saving encrypted user id to a cookie
-      # - saving remember_token to cookie
-      # See definition in session_helper. 
-      remember user
+      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
 
       log_in user      # defined in session_helper
       redirect_to user # user is converted to user_url(user)
+
     else
       # The flash hash will be available in the templates. The :danger key is 
       # conventional, but arbitrary. See application.html.erb for the markup.

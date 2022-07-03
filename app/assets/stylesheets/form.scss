@@ -2,12 +2,6 @@
 
 @import "./mixins.scss";  
 
-// form {
-//   p {
-//     margin-top: 30px;
-//   }
-// }
-
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
   width: 100%;
@@ -18,10 +12,6 @@ input, textarea, select, .uneditable-input {
 label {
   font-weight: 700;
   padding-bottom: 6px;
-}
-
-input {
-  height: auto !important;
 }
 
 .error_explanation {

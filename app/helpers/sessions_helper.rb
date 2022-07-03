@@ -46,9 +46,10 @@ module SessionsHelper
 
   # Logs out current user
   def log_out
+    forget(current_user)
+
     # Rails built-in, used here to log user out. Ensures that _all_ session
     # variables are reset upon logging out.
-    forget(current_user())
     reset_session
     @current_user = nil
   end
