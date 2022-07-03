@@ -42,6 +42,11 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, User.digest(self.remember_token))
   end
 
+  # Forgets a user by removing its remember_digest. Called by session.forget.
+  def forget
+    update_attribute(:remember_digest, nil)
+  end
+
   # Returns true if the given token matches the digest
   def authenticated?(token_from_cookie)
     BCrypt::Password.new(self.remember_digest).is_password?(token_from_cookie)
