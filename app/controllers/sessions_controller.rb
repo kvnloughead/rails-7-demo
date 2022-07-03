@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
       # - saving remember_token to cookie
       # See definition in session_helper. 
       remember user
-      
+
       log_in user      # defined in session_helper
       redirect_to user # user is converted to user_url(user)
     else
@@ -32,7 +32,9 @@ class SessionsController < ApplicationController
 
   # Logs out current user.
   def destroy
-    log_out
+    # Only log out when logged in to prevent an undefined user bug when logged 
+    # in in multiple browser tabs.
+    log_out if logged_in?
     redirect_to root_url, status: :see_other # 303 is returned on DELETE
   end
 end
