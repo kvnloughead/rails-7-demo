@@ -9,12 +9,26 @@ module SessionsHelper
     session[:user_id] = user.id
   end
 
-  # Returns the current logged-in user (if any)
+  # Remembers current user in a persistent session. 
+  # Called when creating a new session.
+  def remember(user)
+    user.remember
+    cookies.permanent.encrypted[:user_id] = user.id
+    cookies.permanent[:remember_token] = user.remember_token
+  end
+
+  # Returns the current logged in user.
   def current_user
-    if session[:user_id]
-      # find_by returns nil if no matching document found
-      # note that (a ||= b) is equivalent to (a = a || b)
-      @current_user ||= User.find_by(id: session[:user_id])
+    # If there's a session with a user_id property, assign it to user_id
+    if (user_id = session[:user_id])
+      @current_user ||= User.find_by(id: user_id)
+    elsif (user_id = cookies.encrypted[:user_id])
+      user = User.find_by(id: user_id)
+      # if user exists and token from the cookie matches user.remember_digest
+      if user && user.authenticated?(cookies[:remember_token])
+          log_in user
+          @current_user = user
+      end
     end
   end
 

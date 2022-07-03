@@ -1,5 +1,7 @@
 
 class User < ApplicationRecord
+  attr_accessor :remember_token
+
   # Downcase email before saving user to ensure case insensitive uniqueness
   # before_save { self.email = self.email.downcase }
   before_save { self.email.downcase! }
@@ -22,11 +24,26 @@ class User < ApplicationRecord
   has_secure_password
 
   # Returns hash digest of the given string. 
-  # Used in creating fixtures for testing (test/fixtures/users.yml)
   def User.digest(string)
     # Use minimum cost in testing environment, maximum in production
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : 
                                                   BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
-  end                                                  
+  end
+  
+  # Returns a random token.
+  def User.new_token
+    SecureRandom.urlsafe_base64
+  end
+
+  # Remembers a user in the database for use in persistent sessions.
+  def remember
+    self.remember_token = User.new_token
+    update_attribute(:remember_digest, User.digest(self.remember_token))
+  end
+
+  # Returns true if the given token matches the digest
+  def authenticated?(token_from_cookie)
+    BCrypt::Password.new(self.remember_digest).is_password?(token_from_cookie)
+  end
 end

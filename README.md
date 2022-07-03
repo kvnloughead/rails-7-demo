@@ -10,10 +10,9 @@ by [Michael Hartl](https://www.michaelhartl.com/).
 - Styling with Bootstrap 5 and Sass
 - Code formatting with Prettier and Rufo
 - Test driven development
-- User registration and login
+- User registration and login with BCrypt
 - Support for Gravatars
-- WIP
-  - Persistent login sessions via cookies
+- Persistent login sessions using urlsafe_base64 tokens and cookies
 
 ## License
 
