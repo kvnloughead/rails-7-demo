@@ -49,6 +49,8 @@ class User < ApplicationRecord
 
   # Returns true if the given token matches the digest
   def authenticated?(token_from_cookie)
+    # Prevents a subtle bug involving two browsers per section 9.1.4
+    return false if remember_digest.nil? 
     BCrypt::Password.new(self.remember_digest).is_password?(token_from_cookie)
   end
 end
