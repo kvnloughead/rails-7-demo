@@ -37,9 +37,17 @@ class User < ApplicationRecord
   end
 
   # Remembers a user in the database for use in persistent sessions.
+  # 
+  # @return [String] the current user's remember_digest
   def remember
     self.remember_token = User.new_token
     update_attribute(:remember_digest, User.digest(self.remember_token))
+    remember_digest
+  end
+
+  # @return [String] a session token to prevent session hijacking.
+  def session_token
+    remember_digest || remember
   end
 
   # Forgets a user by removing its remember_digest. Called by session.forget.

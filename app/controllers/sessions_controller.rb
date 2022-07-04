@@ -8,17 +8,18 @@ class SessionsController < ApplicationController
   end
 
   def create
-    # params comes from login form submission
-    user = User.find_by(email: params[:session][:email].downcase)
+    # Creating an @variable in Controller.create allows you to access
+    # the instance inside tests using assigns(:variable).
+    @user = User.find_by(email: params[:session][:email].downcase)
     
     # `user&.foo` is equivalent to `user && user.foo`
-    if user&.authenticate(params[:session][:password])
+    if @user&.authenticate(params[:session][:password])
       # Rails built-in, used here to protect against session fixation.
       reset_session
-      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+      params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
 
-      log_in user      # defined in session_helper
-      redirect_to user # user is converted to user_url(user)
+      log_in @user      # defined in session_helper
+      redirect_to @user # user is converted to user_url(user)
 
     else
       # The flash hash will be available in the templates. The :danger key is 

@@ -2,30 +2,42 @@
 # Including them in application_controller makes them available in controllers
 module SessionsHelper
 
-  # Logs in the user
+  # Logs in the supplied user.
+  #
+  # @param user [User] the User instance to be logged in
   def log_in(user)
-    # session method is a Rails built-in. 
-    # Sessions created in this way end when the browser window is closed.
     session[:user_id] = user.id
+    # Used to guard against session replay attacks.
+    # See https://bit.ly/33UvK0w for more.
+    session[:session_token] = user.session_token
   end
 
-  # Remembers current user in a persistent session. 
-  # Called when creating a new session.
+  # Remembers current user.
+  #
+  # @param user [User] the User instance to be remembered
   def remember(user)
-    user.remember
+    user.remember # Creates remember_token and remember_digest the for user
     cookies.permanent.encrypted[:user_id] = user.id
     cookies.permanent[:remember_token] = user.remember_token
   end
 
-  # Returns the current logged in user.
+  # @return [User] the currently logged in user.
   def current_user
+
     # If there's a session with a user_id property, assign it to user_id
     if (user_id = session[:user_id])
-      @current_user ||= User.find_by(id: user_id)
+      user = User.find_by(id: user_id)
+      # Guard against session replay attacks.
+      if user && session[:session_token] == user.session_token
+        @current_user = user
+      end
+
+    # Else if there's a cookie with a user_id property, assign it to user_id
     elsif (user_id = cookies.encrypted[:user_id])
       user = User.find_by(id: user_id)
+      
       # if user exists and token from the cookie matches user.remember_digest
-      if user && user.authenticated?(cookies[:remember_token])
+      if user&.authenticated?(cookies[:remember_token])
           log_in user
           @current_user = user
       end
