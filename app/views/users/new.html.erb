@@ -2,32 +2,16 @@
 whether to use POST or PATCH.  -->
 
 <% provide(:title, 'Sign up') %>
+<% provide(:form_header, 'Sign up') %>
+<% provide(:submit_btn_text, 'Create my account') %>
 
 <div class="row d-flex justify-content-center">
   <div class="col-md-6 col-md-offset-3">
     <!-- @user = User.new is passed from User.new controller -->
     <!-- Rails infers that a POST should be made to /users -->
-    <%= form_with(model: @user) do |f| %>
-      <h1>Sign up</h1>
-
-      <%= render 'shared/error_messages' %>
-      <%= f.label :name %>
-      <%= f.text_field :name, class: 'form-control' %>
-
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
-
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
-
-      <%= f.label :password_confirmation, 'Confirmation' %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
-
-      <%= f.submit 'Create my account', class: 'btn btn-primary mt-3' %>
-
-      <p class="mt-4">
-        Already registered? <%= link_to 'Log in now!', login_path %>
-      </p>
-    <% end %>
+    <%= render 'form' %>
+    <p class="mt-4">
+      Already registered? <%= link_to 'Log in now!', login_path %>
+    </p>
   </div>
 </div>

@@ -2,26 +2,12 @@
 whether to use POST or PATCH. -->
 
 <% provide(:title, 'Edit user') %>
+<% provide(:form_header, 'Update your profile') %>
+<% provide(:submit_btn_text, 'Save changes') %>
 
 <div class="row d-flex justify-content-center">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_with(model: @user) do |f| %>
-      <h1>Update your profile</h1>
-      <%= render 'shared/error_messages' %>
-      <%= f.label :name %>
-      <%= f.text_field :name, class: 'form-control' %>
-
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
-
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
-
-      <%= f.label :password_confirmation, 'Confirmation' %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
-
-      <%= f.submit 'Save changes', class: 'btn btn-primary mt-3' %>
-    <% end %>
+    <%= render 'form' %>
 
     <div class="gravatar__edit">
       <%= gravatar_for @user %>
