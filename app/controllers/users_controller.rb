@@ -3,12 +3,12 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  # Shows view in users/show.html.erb at users/:id.
   def show
-    # Injects @user variable with appropriate id into the view
-    #  - url: root_path/users?id=user-id
     @user = User.find(params[:id])
   end
 
+  # Creates new user from form data. 
   def create 
     @user = User.new(user_params)
     if @user.save
@@ -23,6 +23,11 @@ class UsersController < ApplicationController
     else
       render 'new', status: :unprocessable_entity 
     end
+  end
+
+  # Shows view in users/edit.html.erb at users/:id/edit.
+  def edit
+    @user = User.find(params[:id])
   end
 
   private

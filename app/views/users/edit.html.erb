@@ -1,15 +1,12 @@
-<!-- Form to create new user. Rails checks @user.new_record? to determine 
-whether to use POST or PATCH.  -->
+<!-- Form to edit existing user. Rails checks @user.new_record? to determine 
+whether to use POST or PATCH. -->
 
-<% provide(:title, 'Sign up') %>
+<% provide(:title, 'Edit user') %>
 
 <div class="row d-flex justify-content-center">
   <div class="col-md-6 col-md-offset-3">
-    <!-- @user = User.new is passed from User.new controller -->
-    <!-- Rails infers that a POST should be made to /users -->
     <%= form_with(model: @user) do |f| %>
-      <h1>Sign up</h1>
-
+      <h1>Update your profile</h1>
       <%= render 'shared/error_messages' %>
       <%= f.label :name %>
       <%= f.text_field :name, class: 'form-control' %>
@@ -23,11 +20,15 @@ whether to use POST or PATCH.  -->
       <%= f.label :password_confirmation, 'Confirmation' %>
       <%= f.password_field :password_confirmation, class: 'form-control' %>
 
-      <%= f.submit 'Create my account', class: 'btn btn-primary mt-3' %>
-
-      <p class="mt-4">
-        Already registered? <%= link_to 'Log in now!', login_path %>
-      </p>
+      <%= f.submit 'Save changes', class: 'btn btn-primary mt-3' %>
     <% end %>
+
+    <div class="gravatar__edit">
+      <%= gravatar_for @user %>
+      <!-- rel="noopener" prevents phishing when target="_blank" -->
+      <a href="https://gravatar.com/emails" rel="noopener" target="_blank">
+        change
+      </a>
+    </div>
   </div>
 </div>
