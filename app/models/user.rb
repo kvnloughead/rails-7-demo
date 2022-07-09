@@ -13,8 +13,9 @@ class User < ApplicationRecord
                     length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: true
-
-  validates :password, presence: true, length: { minimum: 6 }
+  # We allow password to be nil so that the edit form doesn't require password.
+  # has_secure_password still ensures that password can't be nil on registration
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
                     
   # Automagically provides 
   #  - ability to save securely hashed `password_digest` attribute

@@ -14,7 +14,7 @@ class ActiveSupport::TestCase
   fixtures :all
   include ApplicationHelper
   
-  # Returns true if the user is logged in.
+  # Returns true if the user is logged in. For use in tests.
   def is_logged_in?
     @user.id == session[:user_id]
   end

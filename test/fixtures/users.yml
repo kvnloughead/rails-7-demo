@@ -6,3 +6,8 @@ test_user:
   # Can't add a password property to fixtures for some reason, so we adopt
   # the convention of always using the password 'password'
   password_digest: <%= User.digest('password') %>
+
+other_user:
+  name: Other User
+  email: other@elsewhere.com
+  password_digest: <%= User.digest('password') %>

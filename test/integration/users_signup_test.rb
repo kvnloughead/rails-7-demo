@@ -13,7 +13,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     @not_matching_pwds = { **@user_data, password: "password", 
                            password_confirmation: "pwd" }
 
-    @first_error_selector = "div.error_explanation .alert ul li"
+    @first_error_selector = "div.error_explanation ul li"
   end
 
   test "user not created on invalid form submission" do

@@ -23,7 +23,6 @@ module SessionsHelper
 
   # @return [User] the currently logged in user.
   def current_user
-
     # If there's a session with a user_id property, assign it to user_id
     if (user_id = session[:user_id])
       user = User.find_by(id: user_id)
@@ -44,9 +43,14 @@ module SessionsHelper
     end
   end
 
-  # Returns true if the user is logged in, otherwise false
+  # @return [Boolean] whether the user is logged in
   def logged_in?
     !current_user.nil?
+  end
+
+  # @return [Boolean] whether the given user is the current user
+  def current_user?(user)
+    user && user == @current_user
   end
   
   # Forgets a persistent session.
