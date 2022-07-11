@@ -60,13 +60,15 @@ module SessionsHelper
     cookies.delete(:remember_token)
   end
 
-  # Logs out current user
+  # Logs out current user/
   def log_out
     forget(current_user)
-
-    # Rails built-in, used here to log user out. Ensures that _all_ session
-    # variables are reset upon logging out.
-    reset_session
+    reset_session # Rails built-in, ensures that all session variables are reset
     @current_user = nil
+  end
+
+  # Stores the URL a user is attempting to access via a GET request.
+  def store_location
+    session[:forwarding_url] = request.original_url if request.get?
   end
 end

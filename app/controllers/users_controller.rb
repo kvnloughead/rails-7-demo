@@ -52,6 +52,7 @@ class UsersController < ApplicationController
     # Prevents users from editing profiles if they are not logged in.
     def handle_unauthorized_user
       unless logged_in?
+        store_location # store requested URL for later use
         flash[:danger] = "Please log in."
         redirect_to login_url, status: :see_other
       end
