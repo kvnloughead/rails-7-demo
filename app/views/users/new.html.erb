@@ -7,8 +7,6 @@ whether to use POST or PATCH.  -->
 
 <div class="row d-flex justify-content-center">
   <div class="col-md-6 col-md-offset-3">
-    <!-- @user = User.new is passed from User.new controller -->
-    <!-- Rails infers that a POST should be made to /users -->
     <%= render 'form' %>
     <p class="mt-4">
       Already registered? <%= link_to 'Log in now!', login_path %>

@@ -1,9 +1,15 @@
 class UsersController < ApplicationController
-  before_action :handle_unauthorized_user, only: [:edit, :update]
+  before_action :handle_unauthorized_user, only: [:index, :edit, :update]
   before_action :handle_incorrect_user, only: [:edit, :update]
 
+  # Shows all users.
+  def index 
+    @users = User.all
+  end
+
+  # Shows new user form view.
   def new
-    @user = User.new
+    @user = User.new 
   end
 
   # Shows view in users/show.html.erb at users/:id.
