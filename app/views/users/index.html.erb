@@ -1,13 +1,11 @@
-<!-- View showing all users. @users is declared in the index action. -->
+<!-- View showing paginated users. @users is declared in the index action. -->
 
 <% provide(:title, 'All users') %>
 <h1>All users</h1>
 
+<%= will_paginate %>
 <ul class="users">
-  <% @users.each do |user| %>
-    <li>
-      <%= gravatar_for user, size: 50 %>
-      <%= link_to user.name, user %>
-    </li>
-  <% end %>
+  <!-- Iterates through @users and fetches the _user partial for each one -->
+  <%= render @users %>
 </ul>
+<%= will_paginate %>

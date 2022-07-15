@@ -4,7 +4,8 @@ class UsersController < ApplicationController
 
   # Shows all users.
   def index 
-    @users = User.all
+    # paginate serves up chunks of users rather than the whole bunch
+    @users = User.paginate(page: params[:page])
   end
 
   # Shows new user form view.

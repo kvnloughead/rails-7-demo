@@ -11,3 +11,11 @@ other_user:
   name: Other User
   email: other@elsewhere.com
   password_digest: <%= User.digest('password') %>
+
+# additional random users for testing
+<% 30.times do |n| %>
+user_<%= n %>:
+  name:  <%= "User #{n}" %>
+  email: <%= "user-#{n}@example.com" %>
+  password_digest: <%= User.digest('password') %>
+<% end %>
