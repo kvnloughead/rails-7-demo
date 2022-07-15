@@ -10,7 +10,8 @@
 User.create!(name: "Example User", 
              email: "example@railstutorial.org",
              password: "asdfasdf",
-             password_confirmation: "asdfasdf")
+             password_confirmation: "asdfasdf",
+             admin: true)
 
 # Generate additional random users.
 99.times do |n|

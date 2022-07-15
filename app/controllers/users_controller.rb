@@ -49,7 +49,9 @@ class UsersController < ApplicationController
 
   private
     # Creates secure hash of "strong parameters" to prevent mass assignment
-    # vulnerability.
+    # vulnerability. Note that we don't include the :admin field in the list
+    # of permitted attributes. This prevents users from granting themselves
+    # unauthorized permissions.
     def user_params
       params.require(:user).permit(:name, :email, :password,            
                                    :password_confirmation)
