@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_action :handle_unauthorized_user, only: [:index, :edit, :update]
-  before_action :handle_incorrect_user, only: [:edit, :update]
+  before_action :require_login, only: [:index, :edit, :update, :destroy]
+  before_action :require_correct_user, only: [:edit, :update]
+  before_action :require_admin, only: :destroy
 
   # Shows all users.
   def index 
@@ -36,7 +37,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  # Updates user 
+  # Updates user with data from edit view form. 
   def update 
     @user = User.find(params[:id])
     if @user.update(user_params)
@@ -45,6 +46,13 @@ class UsersController < ApplicationController
     else
       render 'edit', status: :unprocessable_entity
     end
+  end
+
+  # Destroys user. Prompts for confirmation first (see _users partial).
+  def destroy
+    User.find(params[:id]).destroy
+    flash[:success] = "User deleted"
+    redirect_to users_url, status: :see_other
   end
 
   private
@@ -57,9 +65,8 @@ class UsersController < ApplicationController
                                    :password_confirmation)
     end
 
-    # Before filter for :edit and :update actions.
-    # Prevents users from editing profiles if they are not logged in.
-    def handle_unauthorized_user
+    # Before filter. Prevents users from performing action if not logged in.
+    def require_login
       unless logged_in?
         store_location # store requested URL for later use
         flash[:danger] = "Please log in."
@@ -67,10 +74,19 @@ class UsersController < ApplicationController
       end
     end
 
-    def handle_incorrect_user
+    # Before filter. Prevents user from performing action on other users.
+    def require_correct_user
       @user = User.find(params[:id])
       unless current_user?(@user)
         flash[:danger] = "You can only edit your own profile."
+        redirect_to(root_url, status: :see_other)
+      end
+    end
+
+    # Before filter. Prevents user from performing action if not admin. 
+    def require_admin
+      unless current_user.admin?
+        flash[:danger] = "You are not authorized to perform this action."
         redirect_to(root_url, status: :see_other)
       end
     end
