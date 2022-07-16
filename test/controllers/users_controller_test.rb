@@ -54,4 +54,21 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
                                       admin: true }}
     assert_not @other_user.admin?
   end
+
+  def delete_fails_and_redirects(redirects_to)
+    assert_no_difference 'User.count' do
+      delete user_path(@user)
+    end
+    assert_response :see_other
+    assert_redirected_to redirects_to
+  end
+
+  test 'should redirect to login on destroy when not logged in' do
+    delete_fails_and_redirects(login_url)
+  end
+
+  test 'should redirect to home on destroy when logged in but not admin' do
+    log_in_as(@user)
+    delete_fails_and_redirects(root_url)
+  end
 end

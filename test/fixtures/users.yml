@@ -1,10 +1,17 @@
 # User fixture with valid credentials
 # Access in tests with `user = users(:test_user)`
+
+admin_user:
+  name: Admin
+  email: admin@example.com
+  # Can't add a password property to fixtures for some reason, so we adopt
+  # the convention of always using the password 'password'
+  password_digest: <%= User.digest('password') %>
+  admin: true
+
 test_user:
   name: Test User
   email: test@example.com
-  # Can't add a password property to fixtures for some reason, so we adopt
-  # the convention of always using the password 'password'
   password_digest: <%= User.digest('password') %>
 
 other_user:
