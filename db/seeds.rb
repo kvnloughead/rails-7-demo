@@ -11,12 +11,16 @@ User.create!(name: "Example User",
              email: "example@railstutorial.org",
              password: "asdfasdf",
              password_confirmation: "asdfasdf",
-             admin: true)  
+             admin: true,
+             activated: true,
+             activated_at: Time.zone.now)  
 
 # Generate additional random users.
 99.times do |n|
   User.create!(name:                  Faker::Name.name,
                email:                 "example-#{n+1}@railstutorial.org", 
                password:              "password",
-               password_confirmation: "password")
+               password_confirmation: "password",
+               activated: true,
+               activated_at: Time.zone.now)
 end

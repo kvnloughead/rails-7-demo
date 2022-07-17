@@ -1,10 +1,10 @@
 
 class User < ApplicationRecord
-  attr_accessor :remember_token
+  attr_accessor :remember_token, :activation_token
 
   # Downcase email before saving user to ensure case insensitive uniqueness
-  # before_save { self.email = self.email.downcase }
-  before_save { self.email.downcase! }
+  before_save :downcase_email
+  before_create :create_activation_digest
 
   validates :name, presence: true, length: { maximum: 50 }
   
@@ -58,8 +58,20 @@ class User < ApplicationRecord
 
   # Returns true if the given token matches the digest
   def authenticated?(token_from_cookie)
-    # Prevents a subtle bug involving two browsers per section 9.1.4
-    return false if remember_digest.nil? 
+    return false if remember_digest.nil? # prevents bug per section 9.1.4 
     BCrypt::Password.new(self.remember_digest).is_password?(token_from_cookie)
   end
+
+  private # private methods have no external api
+
+    # Converts email to lowercase.
+    def downcase_email
+      self.email.downcase!
+    end
+
+    # Creates and assigns activation_token and digest.
+    def create_activation_digest
+      self.activation_token = User.new_token
+      self.activation_digest = User.digest(self.activation_token)
+    end
 end

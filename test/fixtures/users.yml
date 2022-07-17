@@ -8,16 +8,22 @@ admin_user:
   # the convention of always using the password 'password'
   password_digest: <%= User.digest('password') %>
   admin: true
+  activated: true
+  activated_at: <%= Time.zone.now %>
 
 test_user:
   name: Test User
   email: test@example.com
   password_digest: <%= User.digest('password') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
 
 other_user:
   name: Other User
   email: other@elsewhere.com
   password_digest: <%= User.digest('password') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
 
 # additional random users for testing
 <% 30.times do |n| %>
@@ -25,4 +31,6 @@ user_<%= n %>:
   name:  <%= "User #{n}" %>
   email: <%= "user-#{n}@example.com" %>
   password_digest: <%= User.digest('password') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
 <% end %>
