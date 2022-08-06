@@ -34,6 +34,8 @@ end
 
 group :development do
   gem "web-console", "4.2.0"
+  gem 'guard-livereload', '~> 2.5', require: false
+  gem "rack-livereload"
 end
 
 group :test do

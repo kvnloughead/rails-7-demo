@@ -3,6 +3,15 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # Add Rack::LiveReload to the bottom of the middleware stack with the default options:
+  config.middleware.insert_after ActionDispatch::Static, Rack::LiveReload
+
+  # or, if you're using better_errors:
+  config.middleware.insert_before Rack::Runtime, Rack::LiveReload
+  
+  # or, if you're using better_errors with rails 6.
+  config.middleware.insert_before Rack::Runtime, Rack::LiveReload
+
   # In the development environment your application's code is reloaded any time
   # it changes. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
