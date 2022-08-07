@@ -9,7 +9,7 @@ by [Michael Hartl](https://www.michaelhartl.com/).
 - A Rails 7 app using Postgresql and Heroku
 - Styling with Bootstrap 5 and Sass
 - Code formatting with Prettier and Rufo
-- Test driven development
+- Test driven development and live reloading with Guard and rake-livereload
 - User registration and login with BCrypt
 - Support for Gravatars
 - Persistent login sessions using urlsafe_base64 tokens and cookies

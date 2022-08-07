@@ -6,12 +6,12 @@ Rails.application.configure do
   # Add Rack::LiveReload to the bottom of the middleware stack with the default options:
   config.middleware.insert_after ActionDispatch::Static, Rack::LiveReload
 
-  # or, if you're using better_errors:
-  config.middleware.insert_before Rack::Runtime, Rack::LiveReload
+  # # or, if you're using better_errors:
+  # config.middleware.insert_before Rack::Lock, Rack::LiveReload
   
-  # or, if you're using better_errors with rails 6.
-  config.middleware.insert_before Rack::Runtime, Rack::LiveReload
-
+  # # or, if you're using better_errors with rails 6.
+  # config.middleware.insert_before Rack::Runtime, Rack::LiveReload
+  
   # In the development environment your application's code is reloaded any time
   # it changes. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
@@ -72,6 +72,7 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
+  config.assets.digest = false
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 
